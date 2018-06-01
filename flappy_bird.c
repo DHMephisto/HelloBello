@@ -3,9 +3,9 @@
 #include <signal.h>
 #include <sys/time.h>
 
-#define CHAR_BIRD 'O'
-#define CHAR_STONE '*'
-#define CHAR_BLANK ' '
+#define CHAR_BIRD 'O'  //bird is '0'. (Maybe I should name it flappy egg :)
+#define CHAR_STONE '*' //uso stone '*' to build column.
+#define CHAR_BLANK ' ' //Blank, of course ' '.
 
 typedef struct node{
 	int x, y;
