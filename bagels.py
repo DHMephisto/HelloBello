@@ -36,28 +36,27 @@ def isOnlyDigits(num):
     return True
 
 
-
-print('I am thinking of %s-digit number. Try to guess it.' %(NUM_DIGITS))
-print('The clues I give are...')
-print('Bagels, none of the digits is correct.')
-print('Pico, you got a correct number in the wrong position.')
-print('Fermi, you got a correct number in the correct position.')
-
-while True:
-     secretNum = getSecretNum()
-     print('I have thought up a number. You have %s chances to use.' %(MAX_GUESS))
-     guessesTaken = 1
-     while guessesTaken <= MAX_GUESS:
-         guess = ''
-         while len(guess) != NUM_DIGITS or not isOnlyDigits(guess):
-             print('Guess #%s: ' %(guessesTaken))
-             guess = input()
-         print(getClues(guess, secretNum))
-         guessesTaken += 1
-         if guess == secretNum:
-             break
-         if guessesTaken > MAX_GUESS:
-             print('You ran out of guesses. The answer was %s.' %(secretNum))
-     print('Do you want to play again?(Y or N)')
-     if not input().lower().startswith('y'):
-         break
+if __name__ == '__main__':
+    print('I am thinking of %s-digit number. Try to guess it.' %(NUM_DIGITS))
+    print('The clues I give are...')
+    print('Bagels, none of the digits is correct.')
+    print('Pico, you got a correct number in the wrong position.')
+    print('Fermi, you got a correct number in the correct position.')
+    while True:
+        secretNum = getSecretNum()
+        print('I have thought up a number. You have %s chances to use.' %(MAX_GUESS))
+        guessesTaken = 1
+        while guessesTaken <= MAX_GUESS:
+            guess = ''
+            while len(guess) != NUM_DIGITS or not isOnlyDigits(guess):
+                print('Guess #%s: ' %(guessesTaken))
+                guess = input()
+            print(getClues(guess, secretNum))
+            guessesTaken += 1
+            if guess == secretNum:
+               break
+        if guessesTaken > MAX_GUESS:
+            print('You ran out of guesses. The answer was %s.' %(secretNum))
+        print('Do you want to play again?(Y or N)')
+        if not input().lower().startswith('y'):
+            break
