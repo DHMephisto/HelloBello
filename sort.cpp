@@ -61,7 +61,7 @@ void heap_sort(int a[], int size)
 
 
 
-
+//快速排序
 void quick_sort(int a[], int Begin, int End){
 	if(Begin >= End){
 		return;
@@ -98,7 +98,41 @@ void quick_sort(int a[], int Begin, int End){
 }
 
 
+//计数排序
+void CoutSort(int* data, int len){
+	
+	if(len < 0) return;
 
+	//确定最大值
+	int max = data[0];
+	int min = data[0];
+	for (int i=1; i < len; i++){
+		if(data[i] > max) max=data[i];
+		if(data[i] < min) min=data[i];
+	}
+    int d = max - min;
+    
+    //创建统计数组
+    int* coutData = new int[d + 1];
+    for (int i = 0; i <= d; i++)
+        coutData[i] = 0;
+    for (int i=0; i<len; i++)
+        ++coutData[data[i] - min];
+    for (int i =1; i<=d; i++)
+        coutData[i] += coutData[i - 1];
+    
+    //倒序遍历原始数组 找到元素正确位置 输出到结果数组
+    int* sorted = new int[len];
+    for (int i = len-1; i>=0; i--){
+        sorted[coutData[data[i]-min] - 1] = data[i];
+        coutData[data[i]-min]--;
+    }
+    //让原数组等于结果数组
+    for (int i = 0; i<len; i++){
+        data[i] = sorted[i];
+    }
+    return;
+}
 
 
 
@@ -119,7 +153,9 @@ int main(){
 	
 	//heap_sort(a, num);
 
-	quick_sort(a, 0, num-1);
+	//quick_sort(a, 0, num-1);
+    
+    CoutSort(a, num);
 
 	cout << "After sort: "<< endl;
 	for(int i =0; i<num; i++){
