@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 //交换函数
@@ -134,7 +135,52 @@ void CoutSort(int* data, int len){
     return;
 }
 
+//基数排序
+//违反常理，为减少容器个数，从个位开始排序。
 
+/*求数据的最大位数，决定排序次数*/
+int maxbit(int data[], int n){
+	int d = 1;
+	int p = 10;
+	for(int i = 0; i < n; i++){
+		while(data[i] >= p)
+		{
+			p *= 10;
+			d++;
+		}
+	}
+	return d;
+}
+/*函数主体*/
+void RadixSort(int data[], int n){
+	int d = maxbit(data, n);
+	int tmp[n];
+	int count[10];
+	int i, j, k;
+	int radix = 1;
+	for(i=1; i <= d; i++){
+		for(j=0; j<10; j++){
+			count[j] = 0;
+		}
+		for(j=0; j<n; j++){
+			k = (data[j]/radix)%10;
+			count[k]++;
+		}
+		for(j=1; j<10; j++){
+                        count[j]=count[j-1]+count[j];
+                }
+		for(j=n-1; j>=0; j--){
+			k = (data[j]/radix)%10;
+			tmp[count[k]-1]=data[j];
+			count[k]--;	
+		}
+		for(j=0; j<n; j++){
+			data[j] = tmp[j];
+		}
+		radix = radix*10;
+	}
+	return;
+}
 
 int main(){
 	int a[] =  {23, 3, 5, 2, 45, 7, 3, 234, 78, 786};
@@ -146,18 +192,22 @@ int main(){
 	}
 	cout << endl;
 
+	string name;
 
-	//Using different methods to solve problem.
 
-	//insert_sort(a,num);
+	/*Using different methods to solve problem.*/
+
+	//insert_sort(a,num); name = "insert";
 	
-	//heap_sort(a, num);
+	//heap_sort(a, num); name = "heap";
 
-	//quick_sort(a, 0, num-1);
+	//quick_sort(a, 0, num-1); name = "quick";
     
-    CoutSort(a, num);
+    	//CoutSort(a, num); name = "Cout";
+	
+	RadixSort(a, num); name = "Radix";
 
-	cout << "After sort: "<< endl;
+	cout << "After " << name << " sort: "<< endl;
 	for(int i =0; i<num; i++){
 		cout << a[i] <<" ";
 	}
