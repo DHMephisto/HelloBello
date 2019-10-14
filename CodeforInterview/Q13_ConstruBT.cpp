@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <windows.h>
 #include <string.h>
-#include "BinaryTree/BinaryTree.h"
+#include "Utilities/BinaryTree.h"
 
 BinaryTreeNode* ConstructCore(int* startpreorder, int* endpreorder, int* startinorder, int* endinorder);
 
