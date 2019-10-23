@@ -12,8 +12,11 @@ double Power(double base, int exponent)
     int flag = 0;
     if(exponent < 0)
     {
-        flag = 1;
-        exponent *= -1;
+        if(base == 0.0)
+            return 0.0;
+        else
+            flag = 1;
+            exponent *= -1;
     }
 
     double result = Power(base, exponent >> 1);
@@ -29,7 +32,7 @@ double Power(double base, int exponent)
     {
         result = 1/result;
     }
-    
+
 
     return result;
 }
